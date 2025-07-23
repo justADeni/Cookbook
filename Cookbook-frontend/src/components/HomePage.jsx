@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import RecipeCard from './RecipeCard';
+import ErrorPage from './ErrorPage';
 import { API_URL } from '../global';
 import "../App.css";
 
@@ -8,6 +9,7 @@ const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("date"); // 'date' or 'popularity'
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchRecipes();
@@ -33,9 +35,16 @@ const HomePage = () => {
       );
       setRecipes(recipesWithMeta);
     } catch (error) {
-      console.error('Error fetching recipes:', error);
+      setError({
+        code: error.response?.status || 'Error',
+        message: error.response?.data?.error || error.message || 'Failed to fetch recipes.'
+      });
     }
   };
+
+  if (error) {
+    return <ErrorPage code={error.code} message={error.message} />;
+  }
 
   return (
     <div>

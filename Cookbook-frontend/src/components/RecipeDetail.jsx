@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { API_URL } from '../global';
 import ReactMarkdown from 'react-markdown';
+import ErrorPage from './ErrorPage';
 import '../App.css';
 
 const RecipeDetail = () => {
@@ -12,12 +13,14 @@ const RecipeDetail = () => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [author, setAuthor] = useState("");
+  const [error, setError] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     fetchRecipe();
     fetchUpvotes();
     fetchComments();
+    // eslint-disable-next-line
   }, [id]);
 
   const fetchRecipe = async () => {
@@ -25,7 +28,11 @@ const RecipeDetail = () => {
       const response = await axios.get(`${API_URL}/recipes/${id}`);
       setInfo({ name: response.data.name, image: response.data.icon });
       setMarkdown(response.data.markdown);
-    } catch {
+    } catch (error) {
+      setError({
+        code: error.response?.status || 'Error',
+        message: error.response?.data?.error || error.message || 'Failed to fetch recipe.'
+      });
       setInfo(null);
       setMarkdown('');
     }
@@ -70,6 +77,10 @@ const RecipeDetail = () => {
       // ignore
     }
   };
+
+  if (error) {
+    return <ErrorPage code={error.code} message={error.message} />;
+  }
 
   if (!info) return <div>Loading...</div>;
 
