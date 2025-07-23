@@ -224,6 +224,7 @@ h3 {
   text-align: center;
   flex: 0 0 auto;
 }
+
 .recipe-card-square-meta {
   display: flex;
   gap: 1.2em;
