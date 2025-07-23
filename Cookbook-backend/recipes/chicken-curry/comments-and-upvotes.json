@@ -1,0 +1,15 @@
+{
+  "comments": [
+    {
+      "author": "John Doe",
+      "text": "This is a comment",
+      "date": "2021-01-01"
+    },
+    {
+      "author": "Deni",
+      "text": "Example",
+      "date": "2025-07-23T17:33:43.030Z"
+    }
+  ],
+  "upvotes": 5
+}
