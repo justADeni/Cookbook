@@ -17,7 +17,7 @@ app.get('/recipes', async (req, res) => {
     const recipes = await Promise.all(folders.map(async (folder) => {
       const infoPath = path.join(RECIPES_DIR, folder, 'info.json');
       const info = JSON.parse(await fs.readFile(infoPath, 'utf-8'));
-      return { id: folder, name: info.name, icon: info.icon };
+      return { id: folder, name: info.name, icon: info.image };
     }));
     res.json(recipes);
   } catch (err) {

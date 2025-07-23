@@ -6,6 +6,7 @@ import "../App.css";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchRecipes();
@@ -38,10 +39,29 @@ const HomePage = () => {
   return (
     <div>
       <h1>Recipes</h1>
+      <input
+        type="text"
+        placeholder="Search recipes by name..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        style={{
+          padding: '0.5em 1em',
+          borderRadius: '0.5em',
+          border: '1px solid #ccc',
+          marginBottom: '1.5em',
+          fontSize: '1em',
+          width: '100%',
+          maxWidth: '25em',
+          boxSizing: 'border-box',
+        }}
+        aria-label="Search recipes"
+      />
       <div className="recipe-grid">
-        {recipes.map(recipe => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
+        {recipes
+          .filter(recipe => recipe.name.toLowerCase().includes(search.toLowerCase()))
+          .map(recipe => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))}
       </div>
     </div>
   );
