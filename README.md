@@ -1,13 +1,12 @@
 # 🍲 Cookbook Web App
 
-A modern, full-stack web application for sharing, discovering, and discussing recipes. Built as part of a university course project.
+A modern, full-stack web application for discovering and discussing recipes. Built as part of a university course project.
 
 ## ✨ Features
 
-- 📝 Add and browse recipes
-- 🔍 Search recipes by keywords
-- 📈 Sort recipes by popularity or date
-- 👍 Upvote / 👎 Downvote recipes
+- 📝 browse recipes
+- 🔍 Search recipes by titles
+- 👍 Upvote recipes
 - 💬 Comment on recipes
 - ⚛️ Frontend in React
-- 🌐 Backend in Node.js with REST API
+- 🌐 Backend in Node.js with RESTful API powered by Express
